@@ -30,7 +30,7 @@ export default ImageCarousel = () => {
   };
   return (
     <View style={[styles.container]}>
-      <View style={StyleSheet.absoluteFillObject} >
+      <View style={[StyleSheet.absoluteFillObject]} >
         {slides.map((slide, i) => {
           const { width } = useWindowDimensions();
           const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
@@ -42,7 +42,7 @@ export default ImageCarousel = () => {
             <Animated.Image 
               source={slide.image}
               key={i}
-              style={[StyleSheet.absoluteFillObject, {opacity, resizeMode: 'cover'}]}
+              style={[StyleSheet.absoluteFillObject, {opacity, height: '100%'}]}
               blurRadius={30}
             />
           );

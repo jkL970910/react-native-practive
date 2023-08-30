@@ -10,8 +10,10 @@ export const colors = {
   white: '#fff',
   black: '#000',
   // showingColor: '#493d8a',
+  // showingColorSub: '#62656b',
+
   showingColor: '#faebd7',
-  showingColorSub: '#f5dab3'
+  showingColorSub: '#f5dab3',
 };
 
 export const shadow = {
