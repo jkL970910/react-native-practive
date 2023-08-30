@@ -14,7 +14,6 @@ export default ImageCarousel = () => {
     setCurrentIndex(viewableItems[0]?.index);
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-  // function for press button
   const scrollTo = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
@@ -34,7 +33,7 @@ export default ImageCarousel = () => {
       <View style={{ flex: 3 }}>
         <FlatList
           data={slides}
-          renderItem={({ item }) => <ImageItem item={item} />}
+          renderItem={({ item, index }) => <ImageItem item={item} lastIndex={index === slides.length - 1} />}
           horizontal
           showsHorizontalScrollIndicator={false}
           initialScrollIndex={0}
