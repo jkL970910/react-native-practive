@@ -9,6 +9,9 @@ export const colors = {
   light: '#fbfbfb',
   white: '#fff',
   black: '#000',
+  // showingColor: '#493d8a',
+  showingColor: '#faebd7',
+  showingColorSub: '#f5dab3'
 };
 
 export const shadow = {
@@ -24,7 +27,8 @@ export const shadow = {
   dark: {
     shadowColor: colors.black,
     shadowRadius: 4,
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.7,
+    elevation: 3,
     shadowOffset: {
       width: 0,
       height: 2,

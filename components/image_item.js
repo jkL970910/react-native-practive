@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import { shadow, sizes, spacing } from '../constants/theme';
+import { shadow, sizes, spacing, colors } from '../constants/theme';
 
 const CARD_HEIGHT = 400;
 
@@ -44,14 +44,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '800',
-    fontSize: 28,
+    fontSize: 48,
     marginBottom: 10,
-    color: '#493d8a',
+    color: colors.showingColor,
     textAlign: 'center',
   },
   description: {
     fontWeight: '300',
-    color: '#62656b',
+    fontSize: 18,
+    color: colors.showingColorSub,
     textAlign: 'center',
     paddingHorizontal: 64,
   },

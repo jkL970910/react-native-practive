@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { FlatList, View, StyleSheet, Animated, useWindowDimensions } from 'react-native';
 import slides from '../slides';
 import ImageItem from './image_item';
 import Paginator from './paginator';
-import NavigationButton from './button';
+import NavigationButton from './nav_button';
 import NextButton from './next_button';
 
 export default ImageCarousel = () => {
@@ -29,7 +29,25 @@ export default ImageCarousel = () => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
+      <View style={StyleSheet.absoluteFillObject} >
+        {slides.map((slide, i) => {
+          const { width } = useWindowDimensions();
+          const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
+          const opacity = scrollX.interpolate({
+            inputRange,
+            outputRange: [0, 1, 0],
+          });
+          return (
+            <Animated.Image 
+              source={slide.image}
+              key={i}
+              style={[StyleSheet.absoluteFillObject, {opacity, resizeMode: 'cover'}]}
+              blurRadius={30}
+            />
+          );
+        })}
+      </View>
       <View style={{ flex: 3 }}>
         <FlatList
           data={slides}
@@ -51,13 +69,14 @@ export default ImageCarousel = () => {
           ref={slidesRef}
         />
       </View>
-      <Paginator data={slides} scrollX={scrollX} />
       {/* <NextButton
         scrollTo={scrollTo}
         scrollBack={scrollBack}
         percentage={(currentIndex + 1) * (100 / slides.length)}
       /> */}
+      <Paginator data={slides} scrollX={scrollX} />
       <NavigationButton headOrTail={currentIndex / (slides.length - 1)} scrollTo={scrollTo} scrollBack={scrollBack} />
+      
     </View>
   );
 };
