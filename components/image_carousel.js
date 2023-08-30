@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FlatList, View, StyleSheet, Animated } from 'react-native';
+import { FlatList, View, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import slides from '../slides';
 import ImageItem from './image_item';
 import Paginator from './paginator';
+import NavigationButton from './button';
 import NextButton from './next_button';
 
 export default ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
+  const slidesRef = useRef(null);
   const viewableItemsChanged = useRef(({ viewableItems }) => {
-    setCurrentIndex(viewableItems[0].index);
+    setCurrentIndex(viewableItems[0]?.index);
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
   // function for press button
@@ -27,7 +29,6 @@ export default ImageCarousel = () => {
       console.log('First Item.');
     }
   };
-  const slidesRef = useRef(null);
   return (
     <View style={styles.container}>
       <View style={{ flex: 3 }}>
@@ -36,6 +37,7 @@ export default ImageCarousel = () => {
           renderItem={({ item }) => <ImageItem item={item} />}
           horizontal
           showsHorizontalScrollIndicator={false}
+          initialScrollIndex={0}
           pagingEnabled
           bounces={false}
           keyExtractor={(item) => item.id}
@@ -56,6 +58,7 @@ export default ImageCarousel = () => {
         scrollBack={scrollBack}
         percentage={(currentIndex + 1) * (100 / slides.length)}
       /> */}
+      <NavigationButton headOrTail={currentIndex / (slides.length - 1)} scrollTo={scrollTo} scrollBack={scrollBack} />
     </View>
   );
 };
@@ -65,5 +68,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+  },
+  button: {
+    backgroundColor: '#f4338f',
+    borderRadius: 100,
+    padding: 20,
+    top: '20%'
   },
 });
